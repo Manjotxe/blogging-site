@@ -53,5 +53,11 @@
                 <p>No posts available.</p>
             <?php endif;
         }
+        public function getCommentsByPostId($postId)
+        {
+            $stmt = $this->pdo->prepare("SELECT username, comment FROM comments WHERE post_id = ? ORDER BY time DESC");
+            $stmt->execute([$postId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
     }
 ?>

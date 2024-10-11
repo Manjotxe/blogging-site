@@ -1,24 +1,27 @@
 <?php
-session_start();
-include('common/connection2.php');
-include('classes/display.class.php');
+    session_start();
+    include('common/connection2.php');
+    include('classes/display.class.php');
 
-// Check if post ID is passed in the URL
-if (isset($_GET['id'])) {
-    $postId = $_GET['id'];
+    // Check if post ID is passed in the URL
+    if (isset($_GET['id'])) 
+    {
+        $postId = $_GET['id'];
 
-    // Create an instance of DisplayPosts
-    $display = new DisplayPosts($pdo);
+        // Create an instance of DisplayPosts
+        $display = new DisplayPosts($pdo);
 
-    // Fetch the specific post
-    $stmt = $pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE id = ?");
-    $stmt->execute([$postId]);
-    $post = $stmt->fetch(PDO::FETCH_ASSOC);
-} else {
-    // Redirect to index if no post ID is provided
-    header('Location: index.php');
-    exit();
-}
+        // Fetch the specific post
+        $stmt = $pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE id = ?");
+        $stmt->execute([$postId]);
+        $post = $stmt->fetch(PDO::FETCH_ASSOC);
+    } 
+    else 
+    {
+        // Redirect to index if no post ID is provided
+        header('Location: index.php');
+        exit();
+    }
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -27,14 +30,18 @@ if (isset($_GET['id'])) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+    <link href="css/comments.css" rel="stylesheet" type="text/css">
     <style>
         .overlay 
         {
             background-image: url("images/demo/background.jpg");
         }
-        .top
+        .top 
         {
-            background-color: grey;
+            background-image: url("images/demo/marbel.jpg");
+            padding: 20px;
+            color: #fff;
+            height: 750px;
         }
         .post-container {
             display: flex; /* Create a flex container */
@@ -42,17 +49,20 @@ if (isset($_GET['id'])) {
             padding: 20px; /* Add some padding */
         }
 
-        .post-image {
+        .post-image 
+        {
             flex: 0 0 400px; /* Slightly increased width for the image */
             margin-right: 20px; /* Space between image and content */
             margin-left: 123px; /* Adjusted left margin for image */
         }
 
-        .post-content {
+        .post-content 
+        {
             flex: 1; /* Take up the remaining space */
         }
 
-        img {
+        img 
+        {
             max-width: 100%; /* Ensure the image does not overflow */
             height: auto; /* Maintain aspect ratio */
         }
@@ -136,6 +146,46 @@ if (isset($_GET['id'])) {
         </div>
     </div>
 </div>
+<!-- Comment Section -->
+<div class="comment-section">
+    <h2>Comments</h2>
+    <form action="submit_comment.php" method="post">
+        <div class="comment-box">
+            <textarea name="comment" id="comment" rows="4" placeholder="Write your comment here..."></textarea>
+            <input type="hidden" name="id" value="<?php echo htmlspecialchars($postId); ?>">
+            <?php
+            if(!empty($_SESSION['user']))
+            {
+            ?>
+                <button type="submit" name="submit_comment">Submit Comment</button>
+            <?php
+            }
+            else
+            {
+            ?>
+                <a href="login.php">First login, to add a Comment</a>
+            <?php
+            }
+            ?>
+        </div>
+    </form>
+    <div class="comment-list">
+        <?php
+        // Fetch and display comments
+        $comments = $display->getCommentsByPostId($postId);
+        if ($comments): 
+            foreach ($comments as $comment): ?>
+                <div class="comment">
+                    <h3><?php echo htmlspecialchars($comment['username']); ?></h3>
+                    <p><?php echo htmlspecialchars($comment['comment']); ?></p>
+                </div>
+            <?php endforeach; 
+        else: ?>
+            <p>No comments available.</p>
+        <?php endif; ?>
+    </div>
+</div>
+
 
 <div class="bgded overlay row4">
     <footer id="footer" class="hoc clear"> 
