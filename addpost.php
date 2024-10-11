@@ -1,5 +1,6 @@
 <?php
     include("common/connection.php");
+    session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,6 +10,25 @@
     <title>Add Post</title>
     <script src="https://cdn.tiny.cloud/1/cryl9extu64qm6m5abvkf98a4e2ut37sqxw7koum5kw2d9do/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
     <link rel="stylesheet" href="css/post.css?v=1.1"> <!-- Optional: Your own styles -->
+    <style>
+        .login-redirect
+        {
+            background-color: #4CAF50; 
+            border: none; 
+            color: white; 
+            padding: 15px 30px; 
+            text-align: center;
+            text-decoration: none; 
+            display: inline-block; 
+            font-size: 16px; 
+            font-weight: bold; 
+            margin: 10px 5px; 
+            cursor: pointer; 
+            border-radius: 50px; 
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+    </style>
 </head>
 <body>
     <div class="form-container" >
@@ -39,7 +59,20 @@
                 <input type="file" id="image" name="image" accept="image/*" required>
             </div>
             <div>
-                <button type="submit" name="add">Add Post</button>
+                <?php
+                if(!empty($_SESSION['user']))
+                {
+                ?>
+                    <button type="submit" name="add">Add Post</button>
+                <?php
+                }
+                else
+                {
+                ?>
+                    <a href="login.php"><input type="button" class="login-redirect" value="First Login, To create a Post"></a>
+                <?php
+                }
+                ?>
             </div>
         </form>
 

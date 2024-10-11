@@ -5,7 +5,6 @@
     session_destroy();
     header('location:index.php');
   }
-  
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -14,6 +13,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
+<style>
+  .overlay
+  {
+    background-image:url("images/demo/background.jpg");
+  }
+</style>
 </head>
 <body id="top">
 
@@ -68,10 +73,10 @@
 
     <div id="searchform">
       <div>
-        <form action="#" method="post">
+        <form action="" method="get">
           <fieldset>
             <legend>Quick Search:</legend>
-            <input type="text" placeholder="Enter search term&hellip;">
+            <input type="text" name="search" placeholder="Enter search term&hellip;">
             <button type="submit"><i class="fas fa-search"></i></button>
           </fieldset>
         </form>
@@ -97,7 +102,7 @@
 </div>
 
 <!-- Footer and additional content -->
-<div class="bgded overlay row4" style="background-image:url('images/demo/backgrounds/01.png');">
+<div class="bgded overlay row4" >
   <footer id="footer" class="hoc clear"> 
     <div class="center btmspace-50">
       <h6 class="heading">Manjot's Blog</h6>
