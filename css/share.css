@@ -1,0 +1,76 @@
+/* Adjust the position and layout for the share buttons */
+.share-toggle 
+{
+    background-color: #1e7e34; /* Toggle button color */
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+    display: inline-block;
+    margin-top: 10px;
+}
+
+.share-toggle:hover 
+{
+    background-color: #19692c; /* Darker shade on hover */
+}
+
+/* CSS for the share buttons */
+.share-buttons 
+{
+    display: none; /* Initially hide the buttons */
+    flex-direction: column; /* Align buttons vertically */
+    margin-top: 10px; /* Add margin to separate from the toggle button */
+    width: 200px; /* Set a fixed width for the share buttons */
+    position: relative; /* Position them relative to the toggle button */
+    left: 0; /* Align left with the toggle button */
+}
+
+.share-buttons button 
+{
+    background: none; /* No background */
+    border: none; /* No border */
+    cursor: pointer; /* Pointer cursor */
+    padding: 10px; /* Adjusted padding for smaller buttons */
+    margin: 3px 0px; /* Space between buttons */
+    font-size: 16px; /* Medium icon size */
+    display: flex; /* Use flex for better alignment */
+    align-items: center; /* Center icons */
+    transition: transform 0.2s; /* Animation on hover */
+    border-radius: 5px; /* Rounded corners */
+}
+.share-buttons button i 
+{
+    margin-right: 5px; /* Adjust the space between icon and text */
+}
+
+.share-buttons button:hover 
+{
+    transform: scale(1.1); /* Slightly enlarge on hover */
+}
+
+/* Specific styles for social media icons */
+.share-buttons .facebook 
+{
+    color: #3b5998; /* Facebook color */
+}
+
+.share-buttons .whatsapp 
+{
+    color: #25D366; /* WhatsApp color */
+}
+
+.share-buttons .twitter 
+{
+    color: #1DA1F2; /* Twitter color */
+}
+
+/* Adjust positioning to prevent shifting of content */
+.post-image 
+{
+    position: relative; /* Relative positioning for the share buttons */
+    margin-bottom: 20px; /* Add space below the post-image for share buttons */
+}

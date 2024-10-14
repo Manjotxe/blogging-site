@@ -31,6 +31,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
     <link href="css/comments.css" rel="stylesheet" type="text/css">
+    <link href="css/share.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .overlay 
         {
@@ -52,10 +54,9 @@
         .post-image 
         {
             flex: 0 0 400px; /* Slightly increased width for the image */
-            margin-right: 20px; /* Space between image and content */
-            margin-left: 123px; /* Adjusted left margin for image */
+            margin-right: 0px; /* Space between image and content */
+            margin-left: 103px; /* Adjusted left margin for image */
         }
-
         .post-content 
         {
             flex: 1; /* Take up the remaining space */
@@ -135,7 +136,20 @@
     <div class="post-container">
         <div class="post-image">
             <img src="<?php echo htmlspecialchars($post['images']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>">
+            <input type="button" class="share-toggle" value="Share" onclick="toggleShareButtons()"/>
         </div>
+        <div id="share-buttons" class="share-buttons">
+            <button class="facebook" onclick="shareOnFacebook(<?php echo htmlspecialchars($post['id']); ?>)">
+                <i class="fa fa-facebook"></i>  Share on Facebook
+            </button>
+            <button class="whatsapp" onclick="shareOnWhatsApp('<?php echo htmlspecialchars($post['title']); ?>', <?php echo htmlspecialchars($post['id']); ?>)">
+                <i class="fa fa-whatsapp"></i>  Share on WhatsApp
+            </button>
+            <button class="twitter" onclick="shareOnTwitter('<?php echo htmlspecialchars($post['title']); ?>', <?php echo htmlspecialchars($post['id']); ?>)">
+                <i class="fa fa-twitter"></i>  Share on Twitter
+            </button>
+        </div>
+
         <div class="post-content">
             <h1><?php echo htmlspecialchars($post['title']); ?></h1>
             <p><strong>Category:</strong> <?php echo htmlspecialchars($post['category']); ?></p>
@@ -244,5 +258,6 @@
 <script src="layout/scripts/jquery.min.js"></script>
 <script src="layout/scripts/jquery.backtotop.js"></script>
 <script src="layout/scripts/jquery.mobilemenu.js"></script>
+<script src="js/share.js"></script>
 </body>
 </html>
