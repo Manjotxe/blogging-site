@@ -1,7 +1,8 @@
 <?php
     include("common/connection2.php");
     include("classes/display.class.php");
-    $display = new DisplayPosts($pdo);
+
+    
     $category = isset($_GET['category']) ? $_GET['category'] : '';
     $searchbutton = isset($_GET['search']) ? $_GET['search'] : '';
 

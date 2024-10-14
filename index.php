@@ -47,7 +47,7 @@
     <nav id="mainav">
       <ul class="clear">
         <li class="active"><a href="index.php">Home</a></li>
-        <li><a href="#">Gallery</a></li>
+        <li><a href="dashboard.php">My Dashboard</a></li>
         <li><a class="drop" href="#">Categories</a>
           <ul>
             <li><a href="index.php?category=Clothes">Clothing</a></li>
@@ -89,7 +89,7 @@
       <p>My Blogs</p>
       <h3 class="heading">Think Different, Make a Difference.</h3>
       <p>A perfect place where you'll find all the blogs you desire.</p>
-      <footer><a class="btn" href="addpost.php">Add a Post.....</a></footer>
+      <footer><a class="btn" href="dashboard.php">Go to Dashboard</a></footer>
     </article>
   </div>
 </div>

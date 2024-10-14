@@ -25,7 +25,8 @@
 
         public function getAllPosts()
         {
-            $stmt = $this->pdo->query("SELECT id, title, category, images, content FROM blogs ORDER BY id DESC");
+            $stmt = $this->pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE status = ?  ORDER BY id DESC");
+            $stmt->execute([1]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
@@ -57,6 +58,12 @@
         {
             $stmt = $this->pdo->prepare("SELECT username, comment FROM comments WHERE post_id = ? ORDER BY time DESC");
             $stmt->execute([$postId]);
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function getPostsByUsername($username)
+        {
+            $stmt = $this->pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE username = ? ORDER BY id DESC");
+            $stmt->execute([$username]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
     }
