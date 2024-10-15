@@ -1,6 +1,39 @@
 <?php
-    include("common/connection.php");
-    session_start();
+    include("common/connection2.php");
+    include("classes/addpost.class.php");
+
+    // Initialize variables for the post details
+    $title = "";
+    $category = "";
+    $content = "";
+    $image = "";
+
+    // Check if an 'eid' is passed in the URL
+    if (isset($_GET['eid'])) 
+    {
+        $postId = $_GET['eid'];
+
+        // Create an instance of AddPost
+        $addPost = new AddPost($pdo);
+
+        // Fetch the post details
+        $post = $addPost->getPostById($postId);
+
+        // Check if the post was found
+        if ($post) 
+        {
+            $title = $post['title'];
+            $category = $post['category'];
+            $content = $post['content'];
+            $image = $post['images']; // Assuming the image URL is stored in the database
+        } 
+        else 
+        {
+            // Handle the case where the post does not exist
+            echo "Post not found!";
+            exit();
+        }
+    }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -32,52 +65,45 @@
 </head>
 <body>
     <div class="form-container" >
-        <h1>Add New Post</h1>
+        <h1><?php echo isset($postId) ? "Edit Post" : "Add New Post"; ?></h1>
         <form id="addPostForm" action="process_post.php" method="POST" enctype="multipart/form-data">
             <div>
                 <label for="title">Title:</label>
-                <input type="text" id="title" name="title" required>
+                <input type="text" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>" required>
             </div>
             <div>
                 <label for="category">Category:</label>
                 <select id="category" name="category" required>
-                    <option>&lt; Select Option &gt;</option>
-                    <option value="clothes">Clothes</option>
-                    <option value="electronics">Electronics</option>
-                    <option value="books">Books</option>
-                    <option value="furniture">Furniture</option>
-                    <option value="sports">Sports</option>
-                    <option value="accessories">Accessories</option>
+                    <option value=""> &lt; Select Option &gt; </option>
+                    <option value="clothes" <?php if ($category === "clothes") echo "selected"; ?>>Clothes</option>
+                    <option value="electronics" <?php if ($category === "electronics") echo "selected"; ?>>Electronics</option>
+                    <option value="books" <?php if ($category === "books") echo "selected"; ?>>Books</option>
+                    <option value="furniture" <?php if ($category === "furniture") echo "selected"; ?>>Furniture</option>
+                    <option value="sports" <?php if ($category === "sports") echo "selected"; ?>>Sports</option>
+                    <option value="accessories" <?php if ($category === "accessories") echo "selected"; ?>>Accessories</option>
                 </select>
             </div>
             <div>
                 <label for="content">Content:</label>
-                <textarea id="content" name="content"></textarea>
+                <textarea id="content" name="content"><?php echo htmlspecialchars($content); ?></textarea>
             </div>
             <div>
                 <label for="image">Image:</label>
-                <input type="file" id="image" name="image" accept="image/*" required>
+                <input type="file" id="image" name="image" accept="image/*" <?php echo isset($image) ? '' : 'required'; ?>>
+                <?php if ($image): ?>
+                    <p>Current Image: <img src="<?php echo htmlspecialchars($image); ?>" alt="Current Post Image" style="max-width: 100px;"></p>
+                <?php endif; ?>
             </div>
             <div>
-                <?php
-                if(!empty($_SESSION['user']))
-                {
-                ?>
-                    <button type="submit" name="add">Add Post</button>
-                <?php
-                }
-                else
-                {
-                ?>
+                <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($postId); ?>"> <!-- Send the post ID for processing -->
+                <?php if(!empty($_SESSION['user'])): ?>
+                    <button type="submit" name="add"><?php echo isset($postId) ? "Update Post" : "Add Post"; ?></button>
+                <?php else: ?>
                     <a href="login.php"><input type="button" class="login-redirect" value="First Login, To create a Post"></a>
-                <?php
-                }
-                ?>
+                <?php endif; ?>
             </div>
         </form>
-
     </div>
-
     <script>
         // Initialize TinyMCE on the content textarea
         tinymce.init({
@@ -87,7 +113,6 @@
             menubar: false,
             height: 300,
             content_style: "body { font-family: Arial, sans-serif; font-size: 14px; }", // Customize font inside the editor
-            images_upload_url: '/upload', // URL to upload images (change as needed)
             automatic_uploads: true,
             file_picker_types: 'image',
             file_picker_callback: function (callback, value, meta) {

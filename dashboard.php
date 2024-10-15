@@ -74,7 +74,11 @@
         {
             margin: 15px 15px 0 0px;
         }
-        
+        div 
+        {
+            word-wrap: break-word; /* Allow long words to break and wrap */
+            overflow-wrap: break-word; /* Ensure compatibility with more browsers */
+        }
     </style>
 </head>
 <body id="top">
@@ -116,7 +120,7 @@
                     </ul>
                 </li>
                 <li><a href="#">Privacy and Policies</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="admin-login.php">Admin Login</a></li>
                 <li><a href="contactus.php">Contact Us</a></li>
                 <li>
                     <?php if(empty($_SESSION['user'])) { ?>

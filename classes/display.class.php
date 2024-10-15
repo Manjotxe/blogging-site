@@ -10,16 +10,16 @@
 
         public function getPostsByCategory($category)
         {
-            $stmt = $this->pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE category = ? ORDER BY id DESC");
-            $stmt->execute([$category]);
+            $stmt = $this->pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE category = ? AND status = ? ORDER BY id DESC");
+            $stmt->execute([$category,1]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function searchPosts($searchTerm)
         {
-            $stmt = $this->pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE title LIKE ? ORDER BY id DESC");
+            $stmt = $this->pdo->prepare("SELECT id, title, category, images, content FROM blogs WHERE title LIKE ? AND status = ? ORDER BY id DESC");
             $searchTerm = '%' . $searchTerm . '%';
-            $stmt->execute([$searchTerm]);
+            $stmt->execute([$searchTerm,1]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
@@ -66,5 +66,11 @@
             $stmt->execute([$username]);
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
-    }
+        public function getAllUserPosts()
+        {
+            // Fetch all posts from the database
+            $stmt = $this->pdo->query("SELECT id, title, category, images, content, username,status FROM blogs ORDER BY id DESC");
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+    }   
 ?>

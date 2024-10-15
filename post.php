@@ -108,7 +108,7 @@
                     </ul>
                 </li>
                 <li><a href="#">Privacy and Policies</a></li>
-                <li><a href="#">About</a></li>
+                <li><a href="admin-login.php">Admin Login</a></li>
                 <li><a href="contactus.php">Contact Us</a></li>
                 <li>
                     <?php if(empty($_SESSION['user'])) { ?>
