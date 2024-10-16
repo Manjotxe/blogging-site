@@ -76,8 +76,8 @@
         }
         div 
         {
-            word-wrap: break-word; /* Allow long words to break and wrap */
-            overflow-wrap: break-word; /* Ensure compatibility with more browsers */
+            word-wrap: break-word; 
+            overflow-wrap: break-word; 
         }
     </style>
 </head>
