@@ -43,7 +43,14 @@
                                     </a>
                                     <figcaption>
                                         <h6 class="heading"><?php echo htmlspecialchars($post['title']); ?></h6>
-                                        <div><?php echo strip_tags($post['content']); ?></div>
+                                        
+                                        <?php
+                                        // Limit the content to 30 words
+                                        $content = strip_tags($post['content']);
+                                        $words = explode(' ', $content);
+                                        $limitedContent = implode(' ', array_slice($words, 0, 30));
+                                        ?>
+                                        <div><?php echo $limitedContent; ?>...</div>
                                     </figcaption>
                                 </figure>
                             </li>
@@ -53,7 +60,7 @@
             <?php else: ?>
                 <p>No posts available.</p>
             <?php endif;
-        }
+        }        
         public function getCommentsByPostId($postId)
         {
             $stmt = $this->pdo->prepare("SELECT username, comment FROM comments WHERE post_id = ? ORDER BY time DESC");

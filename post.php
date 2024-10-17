@@ -137,6 +137,7 @@
         <div class="post-image">
             <img src="<?php echo htmlspecialchars($post['images']); ?>" alt="<?php echo htmlspecialchars($post['title']); ?>">
             <input type="button" class="share-toggle" value="Share" onclick="toggleShareButtons()"/>
+            <a href="logopdf.php?id=<?php echo $post['id'];?>"><input type="button" class="share-toggle" value="Download PDF "/></a>
         </div>
         <div id="share-buttons" class="share-buttons">
             <button class="facebook" onclick="shareOnFacebook(<?php echo htmlspecialchars($post['id']); ?>)">
