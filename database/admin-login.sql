@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 10, 2024 at 01:39 PM
+-- Generation Time: Oct 18, 2024 at 11:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -24,35 +24,30 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `login`
+-- Table structure for table `admin-login`
 --
 
-CREATE TABLE `login` (
+CREATE TABLE `admin-login` (
   `id` int(11) NOT NULL,
-  `fullname` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `status` int(11) NOT NULL,
-  `token` varchar(255) NOT NULL,
-  `is_verified` int(11) NOT NULL
+  `username` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Dumping data for table `login`
+-- Dumping data for table `admin-login`
 --
 
-INSERT INTO `login` (`id`, `fullname`, `email`, `password`, `status`, `token`, `is_verified`) VALUES
-(49, 'Manjot Singh', 'mtmanjot@gmail.com', '', 0, '', 0),
-(52, 'Manjot Singh', 'manjot9nd1@gmail.com', '', 0, '', 1);
+INSERT INTO `admin-login` (`id`, `username`, `password`) VALUES
+(1, 'manjot', 'manjot');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `login`
+-- Indexes for table `admin-login`
 --
-ALTER TABLE `login`
+ALTER TABLE `admin-login`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -60,10 +55,10 @@ ALTER TABLE `login`
 --
 
 --
--- AUTO_INCREMENT for table `login`
+-- AUTO_INCREMENT for table `admin-login`
 --
-ALTER TABLE `login`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+ALTER TABLE `admin-login`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

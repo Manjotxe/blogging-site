@@ -70,9 +70,12 @@ class AddPost
         if ($stmt) 
         {
             $this->displayAlert("Post added successfully with image!");
-        } else 
+            return true;
+        } 
+        else 
         {
             $this->displayAlert("Error adding post to database.");
+            return false;
         }
     }
 

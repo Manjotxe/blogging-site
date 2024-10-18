@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 11, 2024 at 11:54 AM
+-- Generation Time: Oct 18, 2024 at 11:52 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -41,7 +41,8 @@ CREATE TABLE `comments` (
 
 INSERT INTO `comments` (`id`, `post_id`, `username`, `comment`, `time`) VALUES
 (4, 37, 'Elon Musk', 'I Really liked the overall design of this webpage', '2024-10-11 07:34:12'),
-(5, 17, 'Manjot Singh', 'anuj gupta great.....', '2024-10-11 07:34:49');
+(5, 17, 'Manjot Singh', 'anuj gupta great.....', '2024-10-11 07:34:49'),
+(6, 14, 'Manjot Singh', 'Electronics are just great to be honest', '2024-10-14 04:42:41');
 
 --
 -- Indexes for dumped tables
@@ -61,7 +62,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

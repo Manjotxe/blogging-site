@@ -161,7 +161,15 @@
                         </a>
                         <figcaption>
                             <h2 class=""><?php echo htmlspecialchars($post['title']); ?></h2>
-                            <div><?php echo strip_tags($post['content']); ?></div>
+                            <div>
+                                <?php
+                                // Limit the content to 30 words
+                                $content = strip_tags($post['content']);
+                                $words = explode(' ', $content);
+                                $limitedContent = implode(' ', array_slice($words, 0, 10));
+                                echo $limitedContent . '...'; // Display limited content
+                                ?>
+                            </div>
                         </figcaption>
                     </figure>
                 </li>

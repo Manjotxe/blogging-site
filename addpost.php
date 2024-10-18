@@ -95,7 +95,10 @@
                 <?php endif; ?>
             </div>
             <div>
-                <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($postId); ?>"> <!-- Send the post ID for processing -->
+            <?php if (isset($postId)): ?>
+                <!-- Hidden field for post_id when editing -->
+                <input type="hidden" name="post_id" value="<?php echo htmlspecialchars($postId); ?>">
+            <?php endif; ?>
                 <?php if(!empty($_SESSION['user'])): ?>
                     <button type="submit" name="add"><?php echo isset($postId) ? "Update Post" : "Add Post"; ?></button>
                 <?php else: ?>
