@@ -89,7 +89,15 @@
         <p>My Blogs</p>
         <h3 class="heading">Think Different, Make a Difference.</h3>
         <p>A perfect place where you'll find all the blogs you desire.</p>
-        <footer><a class="btn" href="dashboard.php">Go to Dashboard</a> <a class="btn" href="categorypdf.php?category=Clothes">Download pdf</a></footer>
+        <footer>
+          <a class="btn" href="dashboard.php">Go to Dashboard</a> 
+          <?php
+          if(isset($_GET['category']))
+          {?>
+            <a class="btn" href="categorypdf.php?category=Clothes">Download pdf</a>
+            <?php
+          }?>
+        </footer>
       </article>
     </div>
   </div>
