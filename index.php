@@ -1,10 +1,13 @@
 <?php
+  include('common/connection2.php');
   session_start();
   if(!empty($_GET['log'])) 
   {
     session_destroy();
     header('location:index.php');
   }
+  include('classes/display.class.php');
+  $display = new DisplayPosts($pdo);
 ?>
 <!DOCTYPE html>
 <html lang="">
@@ -50,12 +53,7 @@
           <li><a href="dashboard.php">My Dashboard</a></li>
           <li><a class="drop" href="#">Categories</a>
             <ul>
-              <li><a href="index.php?category=Clothes">Clothing</a></li>
-              <li><a href="index.php?category=Sports">Sports</a></li>
-              <li><a href="index.php?category=Electronics">Electronics</a></li>
-              <li><a href="index.php?category=Books">Books</a></li>
-              <li><a href="index.php?category=Furniture">Furniture</a></li>
-              <li><a href="index.php?category=Accessories">Accessories</a></li>
+              <?php $display->displayCategories(); ?>
             </ul>
           </li>
           <li><a href="#">Privacy and Policies</a></li>

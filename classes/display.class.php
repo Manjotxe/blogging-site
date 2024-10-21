@@ -94,4 +94,20 @@ class DisplayPosts
         $stmt = $this->pdo->query("SELECT id, title, category, images, content, username, status FROM blogs ORDER BY id DESC");
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function displayCategories()
+    {
+        // Query to fetch categories from the 'categories' table
+        $stmt = $this->pdo->query("SELECT categoryname FROM categories");
+        $categories = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($categories) {
+            // Iterate through each category and display it
+            foreach ($categories as $category) {
+                $categoryName = htmlspecialchars($category['categoryname']);
+                echo "<li><a href='index.php?category={$categoryName}'>{$categoryName}</a></li>";
+            }
+        } else {
+            echo "<li>No categories available.</li>";
+        }
+    }
 }
