@@ -6,7 +6,7 @@
     session_destroy();
     header('location:index.php');
   }
-  include('classes/display.class.php');
+  include_once('classes/display.class.php');
   $display = new DisplayPosts($pdo);
 ?>
 <!DOCTYPE html>
