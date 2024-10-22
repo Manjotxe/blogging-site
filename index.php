@@ -15,11 +15,23 @@
   <title>ManjotsBlog</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <link href="layout/styles/layout.css" rel="stylesheet" type="text/css" media="all">
   <style>
     .overlay
     {
       background-image:url("images/demo/background.jpg");
+    }
+    .suggestionbox
+    {
+      display:none;
+      background-color: #eee;
+      border-radius: 8px;
+    }
+    .suggestionbox li
+    {
+      padding:15px;
+      cursor: pointer;
     }
   </style>
   </head>
@@ -74,7 +86,13 @@
           <form action="" method="get">
             <fieldset>
               <legend>Quick Search:</legend>
-              <input type="text" name="search" placeholder="Enter search term&hellip;">
+              <input type="text" id="term" name="search" placeholder="Enter search term&hellip;">
+              <div class="suggestionbox">
+                <ul id="dropdata">
+                  
+                </ul>
+              </div>
+              <script src="js/jquery.js"></script>
               <button type="submit"><i class="fas fa-search"></i></button>
             </fieldset>
           </form>
